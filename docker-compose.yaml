@@ -1,17 +1,12 @@
 version: '3.8'
 services:
-  react:
-    ports:
-      - "5173:5173"
-    restart: always
+  nginx-react:
+    image: fe-hack:latest
+    container_name: fe-hack
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - .:/build
-      - .:/build/node_modules
-    networks:
-      - frontend
-    command: ["npm", "run", "dev"]
-networks:
-  frontend:
+    ports:
+      - 80:80
+    environment:
+      NODE_ENV: production
